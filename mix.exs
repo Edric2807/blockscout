@@ -26,7 +26,7 @@ defmodule BlockScout.Mixfile do
             indexer: :permanent
           ],
           steps: [:assemble, &copy_prod_runtime_config/1],
-          validate_compile_env: false
+          validate_compile_env: true
         ]
       ]
     ]

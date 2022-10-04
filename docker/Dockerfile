@@ -44,7 +44,6 @@ ADD apps/ethereum_jsonrpc/mix.exs ./apps/ethereum_jsonrpc/
 ADD apps/indexer/mix.exs ./apps/indexer/
 
 RUN mix do deps.get, local.rebar --force, deps.compile
-
 ADD . .
 
 COPY . .
@@ -57,8 +56,11 @@ RUN if [ "$COIN" != "" ]; then \
         sed -i "/msgid \"ETH\"/{n;s/msgstr \"\"/msgstr \"${COIN}\"/g}" apps/block_scout_web/priv/gettext/en/LC_MESSAGES/default.po; \
     fi
 
+
 # Run forderground build and phoenix digest
 RUN mix compile && npm install npm@latest
+
+#Run mix deps.compile phoenix --force
 
 # Add blockscout npm deps
 RUN cd apps/block_scout_web/assets/ && \
